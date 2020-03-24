@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,10 +27,11 @@ public class Node : MonoBehaviour
 
     // delay time before animation
     public float delay = 1f;
+    bool m_isInitialized = false;
 
     private void Awake()
     {
-        m_board = Object.FindObjectOfType<Board>();
+        m_board = UnityEngine.Object.FindObjectOfType<Board>();
         m_coordinate = new Vector2(transform.position.x, transform.position.z);
     }
 
@@ -43,7 +45,7 @@ public class Node : MonoBehaviour
             // play scale animation at Start
             if (autoRun)
             {
-                ShowGeometry();
+                InitNode();
             }
             if (m_board != null)
             {
@@ -78,5 +80,29 @@ public class Node : MonoBehaviour
             }
         }
         return nList;
+    }
+
+    public void InitNode()
+    {
+        if (!m_isInitialized)
+        {
+            ShowGeometry();
+            InitNeighbors();
+            m_isInitialized = true;
+        }
+    }
+
+    private void InitNeighbors()
+    {
+        StartCoroutine(InitNeighborsRoutine());
+    }
+
+    IEnumerator InitNeighborsRoutine()
+    {
+        yield return new WaitForSeconds(delay);
+        foreach (Node n in m_neighborNodes)
+        {
+            n.InitNode();
+        }
     }
 }

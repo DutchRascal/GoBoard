@@ -47,7 +47,7 @@ MonoBehaviour:
   geometry: {fileID: 8984632334341377264}
   scaleTime: 0.3
   easeType: 15
-  autoRun: 1
+  autoRun: 0
   delay: 1
 --- !u!1 &8984632334341377264
 GameObject:
