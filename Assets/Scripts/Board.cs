@@ -15,4 +15,18 @@ public class Board : MonoBehaviour
         new Vector2(0f, spacing),
         new Vector2(0f, -spacing)
     };
+
+    private void Awake()
+    {
+        GetNodeList();
+    }
+
+    List<Node> m_allNodes = new List<Node>();
+    public List<Node> AllNodes { get => m_allNodes; }
+
+    public void GetNodeList()
+    {
+        Node[] nList = GameObject.FindObjectsOfType<Node>();
+        m_allNodes = new List<Node>(nList);
+    }
 }
