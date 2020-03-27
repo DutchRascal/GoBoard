@@ -51,6 +51,9 @@ MonoBehaviour:
   easeType: 15
   autoRun: 0
   delay: 0.1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &8984632334341377264
 GameObject:
   m_ObjectHideFlags: 0

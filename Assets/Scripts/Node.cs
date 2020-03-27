@@ -34,6 +34,8 @@ public class Node : MonoBehaviour
     public float delay = 1f;
     bool m_isInitialized = false;
 
+    public LayerMask obstacleLayer;
+
     private void Awake()
     {
         m_board = UnityEngine.Object.FindObjectOfType<Board>();
@@ -109,8 +111,12 @@ public class Node : MonoBehaviour
         {
             if (!m_linkedNodes.Contains(n))
             {
-                LinkNode(n);
-                n.InitNode();
+                Obstacle obstacle = FindObstacle(n);
+                if (!obstacle)
+                {
+                    LinkNode(n);
+                    n.InitNode();
+                }
             }
         }
     }
@@ -135,5 +141,17 @@ public class Node : MonoBehaviour
                 targetNode.LinkedNodes.Add(this);
             }
         }
+    }
+
+    Obstacle FindObstacle(Node targetNode)
+    {
+        Vector3 checkDirection = targetNode.transform.position - transform.position;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(transform.position, checkDirection, out raycastHit, Board.spacing + 0.1f, obstacleLayer))
+        {
+            Debug.Log("NODE FindObstacle: Hit an obstacle from:" + this.name + " to " + targetNode.name);
+            return raycastHit.collider.GetComponent<Obstacle>();
+        }
+        return null;
     }
 }
