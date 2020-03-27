@@ -27,9 +27,6 @@ public class Node : MonoBehaviour
     // ease in-out for animation
     public iTween.EaseType easeType = iTween.EaseType.easeInExpo;
 
-    // do we activate the animation at Start?
-    public bool autoRun = false;
-
     // delay time before animation
     public float delay = 1f;
     bool m_isInitialized = false;
@@ -50,10 +47,7 @@ public class Node : MonoBehaviour
             geometry.transform.localScale = Vector3.zero;
 
             // play scale animation at Start
-            if (autoRun)
-            {
-                InitNode();
-            }
+
             if (m_board != null)
             {
                 m_neighborNodes = FindNeighbors(m_board.AllNodes);
@@ -149,7 +143,7 @@ public class Node : MonoBehaviour
         RaycastHit raycastHit;
         if (Physics.Raycast(transform.position, checkDirection, out raycastHit, Board.spacing + 0.1f, obstacleLayer))
         {
-            Debug.Log("NODE FindObstacle: Hit an obstacle from:" + this.name + " to " + targetNode.name);
+            //Debug.Log("NODE FindObstacle: Hit an obstacle from:" + this.name + " to " + targetNode.name);
             return raycastHit.collider.GetComponent<Obstacle>();
         }
         return null;

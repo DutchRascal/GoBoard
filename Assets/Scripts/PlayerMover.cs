@@ -26,13 +26,21 @@ public class PlayerMover : MonoBehaviour
     {
         m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
     }
+    private void Start()
+    {
+        UpdateBoard();
+        if (m_board && m_board.PlayerNode)
+        {
+            m_board.PlayerNode.InitNode();
+        }
+    }
 
     public void Move(Vector3 destinationPos, float delayTime = 0.25f)
     {
         if (m_board)
         {
             Node targetNode = m_board.FindNoteAt(destinationPos);
-            if (targetNode)
+            if (targetNode && m_board.PlayerNode.LinkedNodes.Contains(targetNode))
             {
                 StartCoroutine(MoveRoutine(destinationPos, delayTime));
             }
@@ -74,6 +82,7 @@ public class PlayerMover : MonoBehaviour
 
         // we are not moving
         isMoving = false;
+        UpdateBoard();
 
     }
 
@@ -105,4 +114,11 @@ public class PlayerMover : MonoBehaviour
         Move(newPosition, 0);
     }
 
+    void UpdateBoard()
+    {
+        if (m_board)
+        {
+            m_board.UpdatePlayerNode();
+        }
+    }
 }
