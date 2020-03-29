@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,8 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
-        m_player = Object.FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+        m_board = FindObjectOfType<Board>().GetComponent<Board>();
+        m_player = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
     }
 
     private void Start()
@@ -44,18 +46,47 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(EndLevelRoutine());
     }
 
-    IEnumerator EndLevelRoutine()
+    IEnumerator StartLevelRoutine()
     {
-        yield return null;
+        Debug.Log("START LEVEL");
+        m_player.playerInput.InputEnabled = false;
+        while (!m_hasLevelStarted)
+        {
+            yield return null;
+        }
     }
 
     IEnumerator PlayLevelRoutine()
     {
-        yield return null;
+        Debug.Log("PLAY LEVEL");
+        m_isGamePlaying = true;
+        yield return new WaitForSeconds(delay);
+        m_player.playerInput.InputEnabled = true;
+        while (!m_isGameOver)
+        {
+            yield return null;
+        }
     }
 
-    IEnumerator StartLevelRoutine()
+    IEnumerator EndLevelRoutine()
     {
-        yield return null;
+        Debug.Log("END LEVEL");
+        m_player.playerInput.InputEnabled = false;
+        while (!m_hasLevelFinished)
+        {
+            yield return null;
+        }
+        RestartLevel();
+    }
+
+    private void RestartLevel()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    public void PlayLevel()
+    {
+        m_hasLevelStarted = true;
     }
 }
