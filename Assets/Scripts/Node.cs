@@ -33,10 +33,15 @@ public class Node : MonoBehaviour
 
     public LayerMask obstacleLayer;
 
+    public bool isLevelGoal = false;
+
+    GameManager m_gamemanager;
+
     private void Awake()
     {
         m_board = UnityEngine.Object.FindObjectOfType<Board>();
         m_coordinate = new Vector2(transform.position.x, transform.position.z);
+        m_gamemanager = FindObjectOfType<GameManager>();
     }
 
     void Start()

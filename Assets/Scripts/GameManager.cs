@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -20,6 +21,11 @@ public class GameManager : MonoBehaviour
     public bool HasLevelFinished { get => m_hasLevelFinished; set => m_hasLevelFinished = value; }
 
     public float delay = 1f;
+
+    public UnityEvent
+        startLevelEvent,
+        playLevelEvent,
+        endLevelEvent;
 
     private void Awake()
     {
@@ -54,6 +60,10 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        if (startLevelEvent != null)
+        {
+            startLevelEvent.Invoke();
+        }
     }
 
     IEnumerator PlayLevelRoutine()
@@ -62,6 +72,10 @@ public class GameManager : MonoBehaviour
         m_isGamePlaying = true;
         yield return new WaitForSeconds(delay);
         m_player.playerInput.InputEnabled = true;
+        if (playLevelEvent != null)
+        {
+            playLevelEvent.Invoke();
+        }
         while (!m_isGameOver)
         {
             yield return null;
@@ -72,6 +86,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("END LEVEL");
         m_player.playerInput.InputEnabled = false;
+        if (endLevelEvent != null)
+        {
+            endLevelEvent.Invoke();
+        }
         while (!m_hasLevelFinished)
         {
             yield return null;
