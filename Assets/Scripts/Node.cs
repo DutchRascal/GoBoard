@@ -46,16 +46,34 @@ public class Node : MonoBehaviour
 
     void Start()
     {
-        // hide the mesh by scaling to zero
-        if (geometry != null)
+        Node[] allNodes;
+        allNodes = FindObjectsOfType<Node>();
+        int i = 0;
+        foreach (Node node in allNodes)
         {
-            geometry.transform.localScale = Vector3.zero;
-
-            // play scale animation at Start
-
-            if (m_board != null)
+            if (node.isLevelGoal)
             {
-                m_neighborNodes = FindNeighbors(m_board.AllNodes);
+                i++;
+            }
+        }
+        if (i > 1)
+        {
+            Debug.LogWarning("NODE Too much isLevelGoal set");
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // hide the mesh by scaling to zero
+            if (geometry != null)
+            {
+                geometry.transform.localScale = Vector3.zero;
+
+                // play scale animation at Start
+
+                if (m_board != null)
+                {
+                    m_neighborNodes = FindNeighbors(m_board.AllNodes);
+                }
             }
         }
     }

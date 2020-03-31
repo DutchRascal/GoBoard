@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get => m_isGameOver; set => m_isGameOver = value; }
     public bool HasLevelFinished { get => m_hasLevelFinished; set => m_hasLevelFinished = value; }
 
-    public float delay = 1f;
+    public float
+        delayToStart = 1f,
+        delayForPlayerInput = 2f;
 
     public UnityEvent
         startLevelEvent,
@@ -70,16 +72,22 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("PLAY LEVEL");
         m_isGamePlaying = true;
-        yield return new WaitForSeconds(delay);
-        m_player.playerInput.InputEnabled = true;
+        yield return new WaitForSeconds(delayToStart);
+        //m_player.playerInput.InputEnabled = true;
         if (playLevelEvent != null)
         {
             playLevelEvent.Invoke();
         }
+        yield return new WaitForSeconds(delayForPlayerInput);
+        m_player.playerInput.InputEnabled = true;
+
         while (!m_isGameOver)
         {
             yield return null;
+            m_isGameOver = IsWinner();
         }
+        m_player.playerInput.InputEnabled = false;
+        Debug.Log("WIN+++++++++======================");
     }
 
     IEnumerator EndLevelRoutine()
@@ -106,5 +114,14 @@ public class GameManager : MonoBehaviour
     public void PlayLevel()
     {
         m_hasLevelStarted = true;
+    }
+
+    private bool IsWinner()
+    {
+        if (m_board.PlayerNode)
+        {
+            return (m_board.PlayerNode == m_board.GoalNode);
+        }
+        return false;
     }
 }

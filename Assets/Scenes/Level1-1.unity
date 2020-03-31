@@ -770,7 +770,7 @@ MonoBehaviour:
   goalPrefab: {fileID: 5596852310487654125, guid: 58d45e70c860a49349ec71993e913cad,
     type: 3}
   drawGoalTime: 2
-  drawGoalDelay: 4.7
+  drawGoalDelay: 4
   drawGoalEaseType: 16
 --- !u!4 &224394081
 Transform:
@@ -1093,7 +1093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c438d8f2536d0413396b337bdcc93dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delayToStart: 1
+  delayForPlayerInput: 4.5
   startLevelEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1178,7 +1179,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1583275767}
         m_MethodName: FadeOn
@@ -2378,7 +2379,7 @@ PrefabInstance:
     - target: {fileID: 8984632332896815233, guid: 62fc55e9ec57749be90a205c0724ea34,
         type: 3}
       propertyPath: isLevelGoal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62fc55e9ec57749be90a205c0724ea34, type: 3}
@@ -4352,7 +4353,7 @@ PrefabInstance:
     - target: {fileID: 8984632332896815233, guid: 62fc55e9ec57749be90a205c0724ea34,
         type: 3}
       propertyPath: isLevelGoal
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62fc55e9ec57749be90a205c0724ea34, type: 3}
