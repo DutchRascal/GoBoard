@@ -56,9 +56,9 @@ public class Node : MonoBehaviour
                 i++;
             }
         }
-        if (i > 1)
+        if (i > 1 || i == 0)
         {
-            Debug.LogWarning("NODE Too much isLevelGoal set");
+            Debug.LogWarning("NODE Too much isLevelGoal set or non set");
             Time.timeScale = 0;
         }
         else
