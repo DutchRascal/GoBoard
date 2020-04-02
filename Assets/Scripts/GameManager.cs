@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         delayForPlayerInput = 2f;
 
     public UnityEvent
+        setupEvent,
         startLevelEvent,
         playLevelEvent,
         endLevelEvent;
@@ -56,6 +57,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartLevelRoutine()
     {
+        Debug.Log("SETUP LEVEL");
+        if (setupEvent != null)
+        {
+            setupEvent.Invoke();
+        }
         Debug.Log("START LEVEL");
         m_player.playerInput.InputEnabled = false;
         while (!m_hasLevelStarted)
