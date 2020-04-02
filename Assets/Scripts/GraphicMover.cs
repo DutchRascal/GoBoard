@@ -89,7 +89,7 @@ public class GraphicMover : MonoBehaviour
                     ));
                 break;
             case GraphicMoverMode.MoveFrom:
-                iTween.MoveTo(gameObject, iTween.Hash(
+                iTween.MoveFrom(gameObject, iTween.Hash(
                     "position", startXform.position,
                     "time", moveTime,
                     "delay", delay,
