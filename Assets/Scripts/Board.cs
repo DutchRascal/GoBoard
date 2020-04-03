@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    // uniform distance between nodes
     public static float spacing = 2f;
-
-    // four compass directions
+    public float
+        drawGoalTime = 2f,
+        drawGoalDelay = 2f;
     public static readonly Vector2[] directions =
     {
         new Vector2(spacing, 0f),
@@ -15,19 +15,13 @@ public class Board : MonoBehaviour
         new Vector2(0f, spacing),
         new Vector2(0f, -spacing)
     };
-
-    List<Node> m_allNodes = new List<Node>();
     public List<Node> AllNodes { get => m_allNodes; }
-
     public Node PlayerNode { get => m_playerNode; }
     public Node GoalNode { get => m_goalNode; }
-
     public GameObject goalPrefab;
-    public float
-        drawGoalTime = 2f,
-        drawGoalDelay = 2f;
     public iTween.EaseType drawGoalEaseType = iTween.EaseType.easeOutExpo;
 
+    List<Node> m_allNodes = new List<Node>();
     Node
         m_playerNode,
         m_goalNode;
@@ -79,6 +73,7 @@ public class Board : MonoBehaviour
     {
         return m_allNodes.Find(n => n.isLevelGoal);
     }
+
     public void DrawGoal()
     {
         if (goalPrefab && m_goalNode)

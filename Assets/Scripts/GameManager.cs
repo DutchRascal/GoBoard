@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("PLAY LEVEL");
         m_isGamePlaying = true;
         yield return new WaitForSeconds(delayToStart);
-        //m_player.playerInput.InputEnabled = true;
         if (playLevelEvent != null)
         {
             playLevelEvent.Invoke();

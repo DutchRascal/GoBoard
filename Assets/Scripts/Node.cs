@@ -15,24 +15,16 @@ public class Node : MonoBehaviour
     public List<Node> LinkedNodes { get => m_linkedNodes; }
 
     Board m_board;
+    bool m_isInitialized = false;
 
-    // reference to mesh for display of the node
     public GameObject
         geometry,
         linkPrefab;
-
-    // time for scale animation to play
-    public float scaleTime = 0.3f;
-
-    // ease in-out for animation
+    public float
+        scaleTime = 0.3f,
+        delay = 1f;
     public iTween.EaseType easeType = iTween.EaseType.easeInExpo;
-
-    // delay time before animation
-    public float delay = 1f;
-    bool m_isInitialized = false;
-
     public LayerMask obstacleLayer;
-
     public bool isLevelGoal = false;
 
     GameManager m_gamemanager;
@@ -136,6 +128,14 @@ public class Node : MonoBehaviour
                 }
             }
         }
+        //StartCoroutine(WaitForIt(2f));
+        //print("Finished");
+    }
+
+    IEnumerator WaitForIt(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        print("Finished");
     }
 
     void LinkNode(Node targetNode)
@@ -152,6 +152,7 @@ public class Node : MonoBehaviour
             if (!m_linkedNodes.Contains(targetNode))
             {
                 m_linkedNodes.Add(targetNode);
+                print(targetNode.delay);
             }
             if (!targetNode.LinkedNodes.Contains(this))
             {
