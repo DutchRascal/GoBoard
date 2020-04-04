@@ -7,7 +7,8 @@ public class Board : MonoBehaviour
     public static float spacing = 2f;
     public float
         drawGoalTime = 2f,
-        drawGoalDelay = 2f;
+        drawGoalDelay = 2f,
+        delay = 1f;
     public static readonly Vector2[] directions =
     {
         new Vector2(spacing, 0f),
@@ -92,7 +93,13 @@ public class Board : MonoBehaviour
     {
         if (m_playerNode)
         {
-            m_playerNode.InitNode();
+            StartCoroutine(WaitForIt(delay));
         }
+    }
+
+    IEnumerator WaitForIt(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        m_playerNode.InitNode();
     }
 }
