@@ -12,6 +12,7 @@ public class Mover : MonoBehaviour
     public float iTweenDelay = 0f;
 
     protected Board m_board;
+    protected Node m_currentNode;
 
     protected virtual void Awake()
     {
@@ -19,16 +20,26 @@ public class Mover : MonoBehaviour
     }
     protected virtual void Start()
     {
+        UpdateCurrentNode();
     }
 
     public void Move(Vector3 destinationPos, float delayTime = 0.25f)
     {
+        if (isMoving) { return; }
+
         if (m_board)
         {
             Node targetNode = m_board.FindNoteAt(destinationPos);
-            if (targetNode && m_board.PlayerNode.LinkedNodes.Contains(targetNode))
+            if (targetNode && m_currentNode)
             {
-                StartCoroutine(MoveRoutine(destinationPos, delayTime));
+                if (m_currentNode.LinkedNodes.Contains(targetNode))
+                {
+                    StartCoroutine(MoveRoutine(destinationPos, delayTime));
+                }
+                else
+                {
+                    Debug.Log("MOVER: " + m_currentNode.name + " not connected " + targetNode.name);
+                }
             }
         }
     }
@@ -63,6 +74,7 @@ public class Mover : MonoBehaviour
 
         // we are not moving
         isMoving = false;
+        UpdateCurrentNode();
 
     }
 
@@ -92,5 +104,13 @@ public class Mover : MonoBehaviour
     {
         Vector3 newPosition = transform.position + new Vector3(0f, 0f, -Board.spacing);
         Move(newPosition, 0);
+    }
+
+    protected void UpdateCurrentNode()
+    {
+        if (m_board)
+        {
+            m_currentNode = m_board.FindNoteAt(transform.position);
+        }
     }
 }
