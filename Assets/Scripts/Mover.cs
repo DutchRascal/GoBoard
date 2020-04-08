@@ -13,14 +13,12 @@ public class Mover : MonoBehaviour
 
     protected Board m_board;
 
-    void Awake()
+    protected virtual void Awake()
     {
         m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
-        m_playerCompass = FindObjectOfType<PlayerCompass>().GetComponent<PlayerCompass>();
     }
-    private void Start()
+    protected virtual void Start()
     {
-        UpdateBoard();
     }
 
     public void Move(Vector3 destinationPos, float delayTime = 0.25f)
@@ -35,20 +33,11 @@ public class Mover : MonoBehaviour
         }
     }
 
-    // coroutine used to move the player
-    protected IEnumerator MoveRoutine(Vector3 destinationPos, float delayTime)
+    protected virtual IEnumerator MoveRoutine(Vector3 destinationPos, float delayTime)
     {
-        if (m_playerCompass)
-        {
-            m_playerCompass.ShowArrows(false);
-        }
-        // we are moving
+
         isMoving = true;
-
-        // set the destination to the destinationPos being passed into the coroutine
         destination = destinationPos;
-
-        // pause the coroutine for a brief periof
         yield return new WaitForSeconds(delayTime);
 
         // move the player toward the destinationPos using the easeType and moveSpeed variables
@@ -74,12 +63,6 @@ public class Mover : MonoBehaviour
 
         // we are not moving
         isMoving = false;
-        UpdateBoard();
-
-        if (m_playerCompass)
-        {
-            m_playerCompass.ShowArrows(true);
-        }
 
     }
 
