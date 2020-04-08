@@ -6,10 +6,14 @@ public class Mover : MonoBehaviour
 {
 
     public Vector3 destination;
-    public bool isMoving = false;
+    public bool
+        isMoving = false,
+        faceDestination = false;
     public iTween.EaseType easeType = iTween.EaseType.easeInOutExpo;
-    public float moveSpeed = 1.5f;
-    public float iTweenDelay = 0f;
+    public float
+        moveSpeed = 1.5f,
+        iTweenDelay = 0f,
+        rotateTime = 0.5f;
 
     protected Board m_board;
     protected Node m_currentNode;
@@ -49,6 +53,11 @@ public class Mover : MonoBehaviour
 
         isMoving = true;
         destination = destinationPos;
+        if (faceDestination)
+        {
+            FaceDestination();
+            yield return new WaitForSeconds(0.25f);
+        }
         yield return new WaitForSeconds(delayTime);
 
         // move the player toward the destinationPos using the easeType and moveSpeed variables
@@ -112,5 +121,18 @@ public class Mover : MonoBehaviour
         {
             m_currentNode = m_board.FindNoteAt(transform.position);
         }
+    }
+
+    void FaceDestination()
+    {
+        Vector3 relativePosition = destination - transform.position;
+        Quaternion newRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+        float newY = newRotation.eulerAngles.y;
+        iTween.RotateTo(gameObject, iTween.Hash(
+            "y", newY,
+            "delay", 0f,
+            "easetype", easeType,
+            "time", rotateTime
+            ));
     }
 }
