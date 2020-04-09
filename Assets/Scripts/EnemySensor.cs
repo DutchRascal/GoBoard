@@ -29,10 +29,4 @@ public class EnemySensor : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateSensor();
-    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : TurnManager
 {
     Board m_board;
     PlayerManager m_player;
@@ -30,8 +30,9 @@ public class GameManager : MonoBehaviour
         playLevelEvent,
         endLevelEvent;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         m_board = FindObjectOfType<Board>().GetComponent<Board>();
         m_player = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
     }
