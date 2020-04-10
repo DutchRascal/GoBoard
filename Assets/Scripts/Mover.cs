@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Mover : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Mover : MonoBehaviour
         moveSpeed = 1.5f,
         iTweenDelay = 0f,
         rotateTime = 0.5f;
+    public UnityEvent finishMovementEvent;
 
     protected Board m_board;
     protected Node m_currentNode;
@@ -84,7 +86,6 @@ public class Mover : MonoBehaviour
         // we are not moving
         isMoving = false;
         UpdateCurrentNode();
-
     }
 
     // move the player one space in the negative X direction

@@ -17,5 +17,9 @@ public class TurnManager : MonoBehaviour
     public void FinishTurn()
     {
         m_isTurnComplete = true;
+        if (m_gameManager)
+        {
+            m_gameManager.UpdateTurn();
+        }
     }
 }

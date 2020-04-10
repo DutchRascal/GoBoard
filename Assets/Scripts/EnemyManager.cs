@@ -17,4 +17,16 @@ public class EnemyManager : TurnManager
         m_enemySensor = FindObjectOfType<EnemySensor>();
         m_board = FindObjectOfType<Board>().GetComponent<Board>();
     }
+
+    public void PlayTurn()
+    {
+        StartCoroutine(PlayTurnRoutine());
+    }
+
+    IEnumerator PlayTurnRoutine()
+    {
+        m_enemySensor.UpdateSensor();
+        yield return new WaitForSeconds(0.5f);
+        m_enemyMover.MoveOneTurn();
+    }
 }
