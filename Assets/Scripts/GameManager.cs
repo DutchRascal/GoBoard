@@ -145,25 +145,23 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTurn()
     {
-        if (m_player)
+        if (m_currentTurn == Turn.Player && m_player != null)
         {
-            if (m_currentTurn == Turn.Player)
+            if (m_player.IsTurnComplete)
             {
-                if (m_player.IsTurnComplete)
-                {
-                    PlayEnemyTurn();
-                }
-
+                PlayEnemyTurn();
             }
-            else if (m_currentTurn == Turn.Enemy)
+
+        }
+        else if (m_currentTurn == Turn.Enemy)
+        {
+            if (IsEnemyTurnComplete())
             {
-                if (IsEnemyTurnComplete())
-                {
-                    PlayPlayerTurn();
-                }
+                PlayPlayerTurn();
             }
         }
     }
+
 
     void PlayPlayerTurn()
     {

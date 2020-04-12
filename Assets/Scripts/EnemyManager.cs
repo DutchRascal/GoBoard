@@ -13,9 +13,9 @@ public class EnemyManager : TurnManager
     protected override void Awake()
     {
         base.Awake();
-        m_enemyMover = FindObjectOfType<EnemyMover>();
-        m_enemySensor = FindObjectOfType<EnemySensor>();
-        m_board = FindObjectOfType<Board>().GetComponent<Board>();
+        m_enemyMover = GetComponent<EnemyMover>();
+        m_enemySensor = GetComponent<EnemySensor>();
+        m_board = GetComponent<Board>();
     }
 
     public void PlayTurn()
@@ -26,7 +26,7 @@ public class EnemyManager : TurnManager
     IEnumerator PlayTurnRoutine()
     {
         m_enemySensor.UpdateSensor();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         m_enemyMover.MoveOneTurn();
     }
 }
