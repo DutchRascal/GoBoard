@@ -1431,7 +1431,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: ed0f21ae74a4c4acd9b1c1e516c93521,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ed0f21ae74a4c4acd9b1c1e516c93521,
         type: 3}
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c438d8f2536d0413396b337bdcc93dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayToStart: 1
+  delayToStart: 2
   delayForPlayerInput: 4.5
   setupEvent:
     m_PersistentCalls:
@@ -4361,7 +4361,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c168de3ddf781413f9141bceb143ca70,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8728271186364448730, guid: c168de3ddf781413f9141bceb143ca70,
         type: 3}
@@ -5847,26 +5847,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7241462685425306524, guid: c9947a74289524cbfa387e55d3283ca5,
-        type: 3}
-      propertyPath: movementType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7241462685425306524, guid: c9947a74289524cbfa387e55d3283ca5,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7241462685425306524, guid: c9947a74289524cbfa387e55d3283ca5,
-        type: 3}
-      propertyPath: rotateTime
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7241462685425306524, guid: c9947a74289524cbfa387e55d3283ca5,
-        type: 3}
-      propertyPath: easeType
-      value: 13
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9947a74289524cbfa387e55d3283ca5, type: 3}
 --- !u!1001 &999397552
@@ -6206,7 +6186,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 318bfab4f2937441eb14e3179c442650,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8219254734200983719, guid: 318bfab4f2937441eb14e3179c442650,
         type: 3}
@@ -9007,7 +8987,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1854826929249590, guid: 61c061762895f4875a2f95da407a4f96, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4762219120083434, guid: 61c061762895f4875a2f95da407a4f96, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9765,8 +9745,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidColor: {r: 1, g: 1, b: 1, a: 1}
   clearColor: {r: 1, g: 1, b: 1, a: 0}
-  delay: 0
-  timeToFade: 1.5
+  delay: 0.5
+  timeToFade: 2
   easeType: 16
 --- !u!114 &1583275768
 MonoBehaviour:
@@ -10268,6 +10248,7 @@ GameObject:
   - component: {fileID: 1685212618}
   - component: {fileID: 1685212617}
   - component: {fileID: 1685212620}
+  - component: {fileID: 1685212621}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -10350,6 +10331,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMover: {fileID: 0}
   playerInput: {fileID: 0}
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1685212621}
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1685212621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685212616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af93035c57b6d49ccb2fde7f672600c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimatorController: {fileID: 468134044}
+  playerDeathTrigger: IsDead
 --- !u!1001 &1702406952
 PrefabInstance:
   m_ObjectHideFlags: 0

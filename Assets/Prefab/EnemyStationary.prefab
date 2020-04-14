@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 7241462685425306521}
   - component: {fileID: 7241462685425306520}
   - component: {fileID: 7241462685425306524}
+  - component: {fileID: -1984631570751500078}
   m_Layer: 0
-  m_Name: guard
+  m_Name: EnemyStationary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,10 +126,10 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 2}
   isMoving: 0
   faceDestination: 0
-  easeType: 17
-  moveSpeed: 1.5
+  easeType: 13
+  moveSpeed: 4
   iTweenDelay: 0
-  rotateTime: 0.5
+  rotateTime: 0.3
   finishMovementEvent:
     m_PersistentCalls:
       m_Calls:
@@ -143,3 +144,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  directionToMove: {x: 0, y: 0, z: 2}
+  movementType: 1
+  standTime: 1
+--- !u!114 &-1984631570751500078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684129537098267640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314b1db3384ee49889127e88bcd6bd44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

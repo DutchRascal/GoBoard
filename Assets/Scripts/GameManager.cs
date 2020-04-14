@@ -203,6 +203,7 @@ public class GameManager : MonoBehaviour
     IEnumerator LoseLevelRoutine()
     {
         m_isGameOver = true;
+        yield return new WaitForSeconds(1.5f);
         if (loseLevelEvent != null)
         {
             loseLevelEvent.Invoke();
