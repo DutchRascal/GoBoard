@@ -48,7 +48,7 @@ public class EnemyMover : Mover
 
     IEnumerator PatrolRoutine()
     {
-        Vector3 startPos = new Vector3(m_currentNode.Coordinate.x, 0f, m_currentNode.Coordinate.y);
+        Vector3 startPos = new Vector3(CurrentNode.Coordinate.x, 0f, CurrentNode.Coordinate.y);
         Vector3 newDest = startPos + transform.TransformVector(directionToMove);
         Vector3 nextDest = startPos + transform.TransformVector(directionToMove * 2f);
         Move(newDest, 0f);

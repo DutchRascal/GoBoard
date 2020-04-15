@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(EnemyMover))]
 [RequireComponent(typeof(EnemySensor))]
@@ -11,6 +12,9 @@ public class EnemyManager : TurnManager
     EnemySensor m_enemySensor;
     Board m_board;
     EnemyAttack m_enemyAttack;
+    bool m_isDead = false;
+    public bool IsDead { get => m_isDead; set => m_isDead = value; }
+    public UnityEvent deathEvent;
 
     protected override void Awake()
     {
@@ -23,6 +27,12 @@ public class EnemyManager : TurnManager
 
     public void PlayTurn()
     {
+        if (m_isDead)
+        {
+            FinishTurn();
+            return;
+        }
+
         StartCoroutine(PlayTurnRoutine());
     }
 
@@ -49,6 +59,16 @@ public class EnemyManager : TurnManager
             {
                 m_enemyMover.MoveOneTurn();
             }
+        }
+    }
+
+    public void Die()
+    {
+        if (IsDead) { return; }
+
+        if (deathEvent != null)
+        {
+            deathEvent.Invoke();
         }
     }
 }

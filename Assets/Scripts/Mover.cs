@@ -20,6 +20,8 @@ public class Mover : MonoBehaviour
     protected Board m_board;
     protected Node m_currentNode;
 
+    public Node CurrentNode { get => m_currentNode; }
+
     protected virtual void Awake()
     {
         m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();

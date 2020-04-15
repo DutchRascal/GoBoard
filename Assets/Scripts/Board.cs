@@ -19,6 +19,7 @@ public class Board : MonoBehaviour
     public List<Node> AllNodes { get => m_allNodes; }
     public Node PlayerNode { get => m_playerNode; }
     public Node GoalNode { get => m_goalNode; }
+
     public GameObject goalPrefab;
     public iTween.EaseType drawGoalEaseType = iTween.EaseType.easeOutExpo;
 
@@ -28,6 +29,13 @@ public class Board : MonoBehaviour
         m_goalNode;
 
     PlayerMover m_player;
+
+    public List<Transform> capturePositions;
+
+    int m_currentCapturePosition = 0;
+    public int CurrentCapturePosition { get => m_currentCapturePosition; set => m_currentCapturePosition = value; }
+    public float capturePositionIconSize = 0.4f;
+    public Color capturePositionIconColor = Color.blue;
 
     private void Awake()
     {
@@ -56,6 +64,22 @@ public class Board : MonoBehaviour
         return null;
     }
 
+    public List<EnemyManager> FindEnemiesAt(Node node)
+    {
+        List<EnemyManager> foundEnemies = new List<EnemyManager>();
+        EnemyManager[] enemies = FindObjectsOfType<EnemyManager>();
+        //EnemyManager[] enemies = FindObjectsOfType<EnemyManager>() as EnemyManager[];
+        foreach (EnemyManager enemy in enemies)
+        {
+            EnemyMover mover = enemy.GetComponent<EnemyMover>();
+            if (mover.CurrentNode == node)
+            {
+                foundEnemies.Add(enemy);
+            }
+        }
+        return foundEnemies;
+    }
+
     public void UpdatePlayerNode()
     {
         m_playerNode = FindPlayerNode();
@@ -67,6 +91,11 @@ public class Board : MonoBehaviour
         if (m_playerNode)
         {
             Gizmos.DrawSphere(m_playerNode.transform.position, 0.2f);
+        }
+        Gizmos.color = capturePositionIconColor;
+        foreach (Transform capturePos in capturePositions)
+        {
+            Gizmos.DrawCube(capturePos.position, Vector3.one * capturePositionIconSize);
         }
     }
 
