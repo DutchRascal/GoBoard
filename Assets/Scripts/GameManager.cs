@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
     {
         if (m_currentTurn == Turn.Player && m_player != null)
         {
-            if (m_player.IsTurnComplete)
+            if (m_player.IsTurnComplete && !AreEnemiesAllDead())
             {
                 PlayEnemyTurn();
             }
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
         m_currentTurn = Turn.Enemy;
         foreach (EnemyManager enemy in m_enemies)
         {
-            if (enemy)
+            if (enemy && !enemy.IsDead)
             {
                 enemy.IsTurnComplete = false;
                 enemy.PlayTurn();
@@ -187,6 +187,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (EnemyManager enemy in m_enemies)
         {
+            if (enemy.IsDead) { continue; }
+
             if (!enemy.IsTurnComplete)
             {
                 return false;
@@ -211,5 +213,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Debug.Log("LOSE! ===================");
         RestartLevel();
+    }
+
+    bool AreEnemiesAllDead()
+    {
+        foreach (EnemyManager enemy in m_enemies)
+        {
+            if (!enemy.IsDead) { return false; }
+        }
+        return true;
     }
 }
