@@ -40,7 +40,7 @@ public class EnemyManager : TurnManager
     {
         if (m_gameManager && !m_gameManager.IsGameOver)
         {
-            m_enemySensor.UpdateSensor();
+            m_enemySensor.UpdateSensor(m_enemyMover.CurrentNode);
             yield return new WaitForSeconds(0f);
 
             if (m_enemySensor.FoundPlayer)
