@@ -14,7 +14,7 @@ public class TurnManager : MonoBehaviour
         m_gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
-    public void FinishTurn()
+    public virtual void FinishTurn()
     {
         m_isTurnComplete = true;
         if (m_gameManager)

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7028403456585088543}
   - component: {fileID: 7028403456585088539}
   - component: {fileID: 556080836722576542}
+  - component: {fileID: 1684129537270238246}
   m_Layer: 0
   m_Name: EnemyPatrol
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 73bd74c9cb2f54a75b30eb8c70ba3ecd, type: 2}
   - {fileID: 2100000, guid: 83a3a8c7a31d541bea4661848e59eb45, type: 2}
-  - {fileID: 2100000, guid: 7056568ee08b04b0d818ad91575d0652, type: 2}
+  - {fileID: 2100000, guid: 3016d42252853460f958bde2b79798f6, type: 2}
   - {fileID: 2100000, guid: fc5275778ef9b4c408af0ddf95046827, type: 2}
   - {fileID: 2100000, guid: 88c8d4a9c2ccf4ec09555c5fd23929fa, type: 2}
   m_StaticBatchInfo:
@@ -98,6 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a406862e6f645e49bfb16bf9ff0b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1684129537270238246}
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7028403456585088543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +174,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314b1db3384ee49889127e88bcd6bd44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1684129537270238246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344336182667382399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cc9bbd953a44755a0d15bbba9ef0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenOffset: {x: 0, y: 10, z: 0}
+  deathDelay: 0
+  offscreenDelay: 1
+  iTweenDelay: 0
+  moveTime: 0.7
+  easeType: 11

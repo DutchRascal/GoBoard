@@ -69,6 +69,7 @@ public class EnemyManager : TurnManager
         if (deathEvent != null)
         {
             deathEvent.Invoke();
+            IsDead = true;
         }
     }
 }
